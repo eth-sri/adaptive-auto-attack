@@ -35,12 +35,14 @@ nbase = 100
 search_space = Linf_search_space({"APGD": True})
 tl = 3  # timelimit
 
-Models = [(AWP_RST_wrn28_10, tl), (AWP_TRADES_wrn34_10, tl), (FeatureScatter, tl), (JEM, tl)]
+# Models = [(AWP_RST_wrn28_10, tl), (AWP_TRADES_wrn34_10, tl), (FeatureScatter, tl), (JEM, tl)]
 # Models = [(kWTA, tl), (EnResNet, tl), (MART, tl), (Hydra, tl)]
 # Models = [(AWP_RST_wrn28_10_compression, tl), (JEM_compression, tl),
 #           (AWP_RST_wrn28_10_transformation, tl), (JEM_transformation, tl)]
 # Models = [(TurningWeakness, tl)]
 
+Models = [(Gowal2020Uncovering_70_16_extra, 4), (Gowal2020Uncovering_28_10_extra, 4),
+          (Zhang2020Geometry, tl), (Gowal2020Uncovering_70_16, 4), (Gowal2020Uncovering_34_20, 4), (Ding2020MMA, tl)]
 
 results = []
 for model, timelimit in Models:

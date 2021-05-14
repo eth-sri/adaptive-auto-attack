@@ -55,6 +55,10 @@ model_list = [AWP_RST_wrn28_10(load=True), AWP_TRADES_wrn34_10(load=True), Featu
 # model_list = [AWP_RST_wrn28_10_transformation(load=True), JEM_transformation(load=True)]
 # model_list = [TurningWeakness(load=True)]
 
+Models = [Gowal2020Uncovering_70_16_extra(load=True), Gowal2020Uncovering_28_10_extra(load=True),
+          Zhang2020Geometry(load=True), Gowal2020Uncovering_70_16(load=True),
+          Gowal2020Uncovering_34_20(load=True), Ding2020MMA(load=True)]
+
 # for f_net in model_list:
 #     attack_eval([aa], f_net, epsilon, norm, ntest, dataset='cifar10', use_vertex_removal=False)
 

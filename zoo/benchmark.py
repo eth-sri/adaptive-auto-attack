@@ -1,6 +1,6 @@
 """ This file defines the benchmark models.
 
-Any benchmark instance needs to inherit BasicInstance.
+Any benchmark instance needs to inherit BenchmarkInstance.
 Method build() is to build a DefenseInstance (instance). Each instance has a model and a detector (default None)
 Method load() is to load the model from the saved file.
 Method train() can be used to train the model if implemented.  
@@ -13,7 +13,7 @@ from utils.defense_instance import DefenseInstance
 from defenses import *
 import os
 import os.path as osp
-# from robustbench.utils import load_model
+from robustbench.utils import load_model
 
 ROTATION_DEGREES = 30
 COMPRESSION_QUALITY = 30
@@ -365,19 +365,55 @@ class CCAT(CommonInstance):
         return instance
 
 
-# class RobustBenchmark(BasicInstance):
-#     def __init__(self, name, load=False, extend='net', strict=True, device='cuda'):
-#         abspath = os.path.abspath(__file__)
-#         dname = os.path.dirname(abspath)
-#         self.extend = extend
-#         self.strict = strict
-#         super(RobustBenchmark, self).__init__(name, False, device, path=os.path.join(dname, 'saved_instances'))
-#
-#     def build(self):
-#         model = load_model(model_name=self.name, norm='Linf')
-#         instance = DefenseInstance(model=model.to(self.device), detector=None)
-#         return instance
-#
+class RobustBenchmark(BenchmarkInstance):
+    def __init__(self, name, load=False, extend='net', strict=True, device='cuda'):
+        abspath = os.path.abspath(__file__)
+        dname = os.path.dirname(abspath)
+        self.extend = extend
+        self.strict = strict
+        super(RobustBenchmark, self).__init__(name, False, device, path=os.path.join(dname, 'saved_instances'))
+
+    def build(self):
+        model = load_model(model_name=self.name, norm='Linf')
+        instance = DefenseInstance(model=model.to(self.device), detector=None)
+        return instance
+
+
+class Gowal2020Uncovering_70_16_extra(RobustBenchmark):
+    def __init__(self, load=False, device='cuda'):
+        name = 'Gowal2020Uncovering_70_16_extra'
+        super(Gowal2020Uncovering_70_16_extra, self).__init__(name, load=False, strict=False, device=device)
+
+
+class Gowal2020Uncovering_28_10_extra(RobustBenchmark):
+    def __init__(self, load=False, device='cuda'):
+        name = 'Gowal2020Uncovering_28_10_extra'
+        super(Gowal2020Uncovering_28_10_extra, self).__init__(name, load=False, strict=False, device=device)
+
+
+class Zhang2020Geometry(RobustBenchmark):
+    def __init__(self, load=False, device='cuda'):
+        name = 'Zhang2020Geometry'
+        super(Zhang2020Geometry, self).__init__(name, load=False, strict=False, device=device)
+
+
+class Gowal2020Uncovering_70_16(RobustBenchmark):
+    def __init__(self, load=False, device='cuda'):
+        name = 'Gowal2020Uncovering_70_16'
+        super(Gowal2020Uncovering_70_16, self).__init__(name, load=False, strict=False, device=device)
+
+
+class Gowal2020Uncovering_34_20(RobustBenchmark):
+    def __init__(self, load=False, device='cuda'):
+        name = 'Gowal2020Uncovering_34_20'
+        super(Gowal2020Uncovering_34_20, self).__init__(name, load=False, strict=False, device=device)
+
+
+class Ding2020MMA(RobustBenchmark):
+    def __init__(self, load=False, device='cuda'):
+        name = 'Ding2020MMA'
+        super(Ding2020MMA, self).__init__(name, load=False, strict=False, device=device)
+
 
 # class Pang2020Boosting(RobustBenchmark):
 #     def __init__(self, load=False, device='cuda'):
@@ -421,8 +457,4 @@ class CCAT(CommonInstance):
 #         super(Engstrom2019Robustness, self).__init__(name, load=False, strict=False, device=device)
 #
 #
-# class Ding2020MMA(RobustBenchmark):
-#     def __init__(self, load=False, device='cuda'):
-#         name = 'Ding2020MMA'
-#         super(Ding2020MMA, self).__init__(name, load=False, strict=False, device=device)
 
