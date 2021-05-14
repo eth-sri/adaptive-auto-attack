@@ -41,8 +41,7 @@ tl = 3  # timelimit
 #           (AWP_RST_wrn28_10_transformation, tl), (JEM_transformation, tl)]
 # Models = [(TurningWeakness, tl)]
 
-Models = [(Gowal2020Uncovering_70_16_extra, 4), (Gowal2020Uncovering_28_10_extra, 4),
-          (Zhang2020Geometry, tl), (Gowal2020Uncovering_70_16, 4), (Gowal2020Uncovering_34_20, 4), (Ding2020MMA, tl)]
+Models = [(Gowal2020Uncovering_28_10_extra, 4), (Zhang2020Geometry, tl), (Gowal2020Uncovering_34_20, 4), (Ding2020MMA, tl)]
 
 results = []
 for model, timelimit in Models:

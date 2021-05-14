@@ -118,9 +118,9 @@ class BaseGradientDescent(FixedEpsilonAttack, ABC):
 
         if self.nes:
             """
-            If nes is True, then sample with NES algorithm
-            NES is a black box attack algorithm, the basic idea is to estimate the expectation of the distribution over
-            some area around the point through sampling. Therefore no gradient information is required.
+            If nes is True, then use NES algorithm
+            NES is a black box attack algorithm, the basic idea is to to estimate the gradient by sampling with 
+            Gaussian distribution centered around the point of interest.
             """
             import torch
             sigma = epsilon
@@ -137,12 +137,8 @@ class BaseGradientDescent(FixedEpsilonAttack, ABC):
                             # delta = ep.normal(ep.PyTorchTensor, x.shape, 0, epsilon)
                             delta = torch.normal(0, sigma, size=x.shape).to('cuda')
                             x_torch = x.raw
-                            delta_plus = (x_torch + delta)
-                            delta_plus.retain_grad()
-                            delta_plus = ep.astensor(delta_plus)
-                            delta_minus = (x_torch - delta)
-                            delta_minus.retain_grad()
-                            delta_minus = ep.astensor(delta_minus)
+                            delta_plus = ep.astensor(x_torch + delta)
+                            delta_minus = ep.astensor(x_torch - delta)
 
                             g += (atleast_kd(loss_fn(delta_plus), delta.ndim) * delta).raw
                             g -= (atleast_kd(loss_fn(delta_minus), delta.ndim) * delta).raw
@@ -154,13 +150,8 @@ class BaseGradientDescent(FixedEpsilonAttack, ABC):
                         #     # delta = ep.normal(ep.PyTorchTensor, x.shape, 0, epsilon)
                         #     delta = torch.normal(0, sigma, size=(self.n_samples,) + x.shape[1:]).to('cuda')
                         #     x_torch = x.raw[ind:ind + 1, :]
-                        #     delta_plus = (x_torch + delta)
-                        #     delta_plus.retain_grad()
-                        #     delta_plus = ep.astensor(delta_plus)
-                        #     delta_minus = (x_torch - delta)
-                        #     delta_minus.retain_grad()
-                        #     delta_minus = ep.astensor(delta_minus)
-                        #
+                        #     delta_plus = ep.astensor(x_torch + delta)
+                        #     delta_minus = ep.astensor(x_torch - delta)
                         #     g[ind, :] += (atleast_kd(single_sample_loss_fn(delta_plus, ind), delta.ndim) * delta).sum(axis=0).raw
                         #     g[ind, :] -= (atleast_kd(single_sample_loss_fn(delta_minus, ind), delta.ndim) * delta).sum(axis=0).raw
 

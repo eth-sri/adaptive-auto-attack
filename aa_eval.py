@@ -49,15 +49,14 @@ from zoo.wideresnet import *
 # model_list = [CCAT(load=True)]
 # model_list = [(Model1(load=True)), (Model2(load=True)), (Model3(load=True)), (Model4(load=True)), (Model5(load=True)),
 #         (Model6(load=True)), (Model7(load=True)), (Model8(load=True)), (Model9(load=True)), (Model10(load=True))]
-model_list = [AWP_RST_wrn28_10(load=True), AWP_TRADES_wrn34_10(load=True), FeatureScatter(load=True), JEM(load=True)]
+# model_list = [AWP_RST_wrn28_10(load=True), AWP_TRADES_wrn34_10(load=True), FeatureScatter(load=True), JEM(load=True)]
 # model_list = [EnResNet(load=True), kWTA(load=True), MART(load=True), Hydra(load=True)]
-# model_list = [AWP_RST_wrn28_10_compression(load=True), JEM_compression(load=True)]
-# model_list = [AWP_RST_wrn28_10_transformation(load=True), JEM_transformation(load=True)]
+# model_list = [AWP_RST_wrn28_10_compression(load=True), JEM_compression(load=True),
+#               AWP_RST_wrn28_10_transformation(load=True), JEM_transformation(load=True)]
 # model_list = [TurningWeakness(load=True)]
 
-Models = [Gowal2020Uncovering_70_16_extra(load=True), Gowal2020Uncovering_28_10_extra(load=True),
-          Zhang2020Geometry(load=True), Gowal2020Uncovering_70_16(load=True),
-          Gowal2020Uncovering_34_20(load=True), Ding2020MMA(load=True)]
+model_list = [Gowal2020Uncovering_28_10_extra(load=True), Zhang2020Geometry(load=True),
+              Gowal2020Uncovering_34_20(load=True), Ding2020MMA(load=True)]
 
 # for f_net in model_list:
 #     attack_eval([aa], f_net, epsilon, norm, ntest, dataset='cifar10', use_vertex_removal=False)
