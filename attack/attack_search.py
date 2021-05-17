@@ -227,7 +227,7 @@ def hyperopt_sha_search(data, space, config, ntrials, nbase_test, points_to_eval
     if sha:
         while k > 1:
             ktop, best_k_args, best_k_scores = get_ktop_config(scores, k, arglist)
-            # sample with replacement
+            # sample with replacement additional n samples
             data_test = get_data_samples(data, n, offset=0, random=True)
             scores, arglist = sha_step(best_k_args, data_test, prev_scores=best_k_scores)
             logsave([scores, arglist], logdir, suffix='sha')

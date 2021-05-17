@@ -1,10 +1,30 @@
 """ This script runs A^3 to search models in group B from the paper
+Old:
 Model code: model name
-B11: Gowal2020Uncovering_28_10_extra
-B12: AWP_RST_wrn28_10
-B13: Zhang2020Geometry
-B14: Hydra
-B15: Gowal2020Uncovering_34_20
+B11: AWP_RST_wrn28_10
+B12: AWP_TRADES_wrn34_10
+B13: FeatureScatter
+B14: JEM
+B15: kWTA
+B16: EnResNet
+B17: MART
+B18: Hydra
+B19: AWP_RST_wrn28_10_compression
+B20: JEM_compression
+B21: AWP_RST_wrn28_10_transformation
+B22: JEM_transformation
+B23: TurningWeakness
+New:
+Model code: model name
+C16: FeatureScatter
+C17: JEM
+C18: kWTA
+C19: EnResNet
+C20: AWP_RST_wrn28_10_compression
+C21: JEM_compression
+C22: AWP_RST_wrn28_10_transformation
+C23: JEM_transformation
+C24: TurningWeakness
 """
 
 import eagerpy as ep
@@ -27,14 +47,12 @@ nbase = 100
 search_space = Linf_search_space({"APGD": True})
 tl = 3  # timelimit
 
-# Models = [(AWP_RST_wrn28_10, tl), (AWP_TRADES_wrn34_10, tl), (FeatureScatter, tl), (JEM, tl)]
-# Models = [(kWTA, tl), (EnResNet, tl), (MART, tl), (Hydra, tl)]
+# Models = [(FeatureScatter, tl), (JEM, tl), (kWTA, tl), (EnResNet, tl)]
 # Models = [(AWP_RST_wrn28_10_compression, tl), (JEM_compression, tl),
 #           (AWP_RST_wrn28_10_transformation, tl), (JEM_transformation, tl)]
 # Models = [(TurningWeakness, tl)]
-
-Models = [(Gowal2020Uncovering_28_10_extra, tl), (Carmon2019Unlabeled, tl), (Zhang2020Geometry, tl),
-          (Hydra, tl), (Gowal2020Uncovering_34_20, tl)]
+Models = [(AWP_RST_wrn28_10, tl), (AWP_TRADES_wrn34_10, tl), (MART, tl), (Hydra, tl)]
+# Models = [(Ding2020MMA, tl)]
 
 results = []
 for model, timelimit in Models:

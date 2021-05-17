@@ -415,6 +415,11 @@ class Ding2020MMA(RobustBenchmark):
         super(Ding2020MMA, self).__init__(name, load=False, strict=False, device=device)
 
 
+class Carmon2019Unlabeled(RobustBenchmark):
+    def __init__(self, load=False, device='cuda'):
+        name = 'Carmon2019Unlabeled'
+        super(Carmon2019Unlabeled, self).__init__(name, load=False, strict=False, device=device)
+
 # class Pang2020Boosting(RobustBenchmark):
 #     def __init__(self, load=False, device='cuda'):
 #         name = 'Pang2020Boosting'
@@ -439,10 +444,6 @@ class Ding2020MMA(RobustBenchmark):
 #         super(Huang2020Self, self).__init__(name, load=False, strict=False, device=device)
 #
 #
-# class Carmon2019Unlabeled(RobustBenchmark):
-#     def __init__(self, load=False, device='cuda'):
-#         name = 'Carmon2019Unlabeled'
-#         super(Carmon2019Unlabeled, self).__init__(name, load=False, strict=False, device=device)
 #
 #
 # class Chen2020Adversarial(RobustBenchmark):
