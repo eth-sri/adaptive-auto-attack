@@ -1,10 +1,10 @@
 """ This script runs A^3 to search models in group B from the paper
 Model code: model name
-B11: Gowal2020Uncovering_28_10_extra
-B12: AWP_RST_wrn28_10
-B13: Zhang2020Geometry
+B10: Gowal2020Uncovering_28_10_extra
+B11: AWP_RST_wrn28_10
+B12: Zhang2020Geometry
+B13: Carmon2019Unlabeled
 B14: Hydra
-B15: Gowal2020Uncovering_34_20
 """
 
 import eagerpy as ep
@@ -16,7 +16,7 @@ from zoo.benchmark import *
 from zoo.wideresnet import *
 
 device = 'cuda'
-epsilon = 8/255
+epsilon = 8/255 # 0.031 for Zhang2020Geometry
 norm = ep.inf
 logdir = 'logB'
 
@@ -27,14 +27,8 @@ nbase = 100
 search_space = Linf_search_space({"APGD": True})
 tl = 3  # timelimit
 
-# Models = [(AWP_RST_wrn28_10, tl), (AWP_TRADES_wrn34_10, tl), (FeatureScatter, tl), (JEM, tl)]
-# Models = [(kWTA, tl), (EnResNet, tl), (MART, tl), (Hydra, tl)]
-# Models = [(AWP_RST_wrn28_10_compression, tl), (JEM_compression, tl),
-#           (AWP_RST_wrn28_10_transformation, tl), (JEM_transformation, tl)]
-# Models = [(TurningWeakness, tl)]
-
-Models = [(Gowal2020Uncovering_28_10_extra, tl), (Carmon2019Unlabeled, tl), (Zhang2020Geometry, tl),
-          (Hydra, tl), (Gowal2020Uncovering_34_20, tl)]
+Models = [(Gowal2020Uncovering_28_10_extra, tl), (AWP_RST_wrn28_10, tl), (Carmon2019Unlabeled, tl),
+          (Zhang2020Geometry, tl), (Hydra, tl)]
 
 results = []
 for model, timelimit in Models:

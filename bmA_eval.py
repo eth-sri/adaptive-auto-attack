@@ -1,15 +1,14 @@
 """ This script runs A^3 to search models in group A from the paper
 Model code: model name
-A1: CCAT
-A2: Model2
-A3: Model3
-A4: Model4
-A5: Model5
-A6: Model6
-A7: Model7
-A8: Model8
-A9: Model9
-A10: Model10
+A1: Model2
+A2: Model3
+A3: Model4
+A4: Model5
+A5: Model6
+A6: Model7
+A7: Model8
+A8: Model9
+A9: Model10
 
 Model1 is not included because it does not contain defenses
 """
@@ -22,7 +21,7 @@ from zoo.cifar_model_pool import *
 from zoo.benchmark import CCAT
 
 device = 'cuda'
-epsilon = 4 / 255  # 0.03 for CCAT
+epsilon = 4 / 255
 norm = ep.inf
 logdir = 'logA'
 
@@ -32,7 +31,6 @@ ntrials = 64
 nbase = 100
 search_space = Linf_search_space({"APGD": True})
 
-# Models = [(CCAT, 2)]
 Models = [(Model1, 0.5), (Model2, 0.5), (Model3, 0.5), (Model4, 0.5), (Model5, 0.5), (Model6, 0.5), (Model7, 0.5),
           (Model8, 0.5), (Model9, 1), (Model10, 1)]
 

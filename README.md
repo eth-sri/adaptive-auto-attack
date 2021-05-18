@@ -8,17 +8,19 @@ arxiv: https://arxiv.org/abs/2102.11860v1
 
 
 ## Setup:
-python version>=3.6
+python version>=3.8
 ```
 1. pip install -r requirement.txt
-2. download folder for models from: https://drive.google.com/file/d/1ajCXluAPUPiyLe2ka9i41jj1YQ6u7YX-/view?usp=sharing (2.2GB)
-3. unzip the folder and replace the folder zoo/saved_instances
+2. pip install git+https://github.com/RobustBench/robustbench.git@v0.2.1
+3. download folder for models from: https://drive.google.com/file/d/1ajCXluAPUPiyLe2ka9i41jj1YQ6u7YX-/view?usp=sharing (2.2GB)
+4. unzip the folder and replace the folder zoo/saved_instances
 ```
 ## Reproduce main result:
 Models need to be selected in the script, and epsilon need to be adjusted. 
 ```
 python bmA_eval.py (A^3 on group A models)
 python bmB_eval.py (A^3 on group B models)
+python bmC_eval.py (A^3 on group C models)
 python autoattack_eval.py (AutoAttack on defenses)
 python aa_detector_eval.py (AutoAttack on defenses with detector)
 ```
