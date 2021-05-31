@@ -1,4 +1,4 @@
-#Auto Adaptive Attack
+# Adaptive AutoAttack
 
 "Automatic Discovery of Adaptive Attacks on Adversarial Defenses"
 
