@@ -177,7 +177,7 @@ def get_robust_img(attack_list, f_net, g_net_model, data, epsilon, norm):
     nimages = images.shape[0]
     remain_idx = np.arange(nimages)
     for attack in attack_list:
-        adv_img, _ = attack(g_net_model, images[remain_idx], labels[remain_idx], epsilon)
+        adv_img = attack(g_net_model, images[remain_idx], labels[remain_idx], epsilon)
         is_adv = misclassification_criterion(f_net, adv_img, labels)
         remove_list = []
         for i in range(is_adv.shape[0]):

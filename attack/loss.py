@@ -13,6 +13,7 @@ and assumes the models output logits
 
 import eagerpy as ep
 import numpy as np
+import torch
 from typing import Callable
 from foolbox_custom.models.base import Model
 
@@ -35,6 +36,11 @@ def get_loss_fn(model: Model, labels: ep.Tensor, type: str, targeted: bool, modi
         "hinge": get_hinge_loss_fn,
         "dlr": get_dlr_loss_fn,
         "logit": get_logit_loss_fn,
+        "zero1": get_dummy_loss_fn,
+        "zero2": get_dummy_loss_fn,
+        "zero3": get_dummy_loss_fn,
+        "zero4": get_dummy_loss_fn,
+        "zero5": get_dummy_loss_fn,
     }
     if type in loss_dict:
         loss_fn = loss_dict[type](model, labels, targeted, modifier)
@@ -198,6 +204,21 @@ def get_logit_loss_fn(model: Model, labels: ep.Tensor, targeted: bool, modifier:
         def untargeted_fn(z, labels):
             targets = get_match_target(modifier['match_target'], labels)
             return (z - targets).square().sum(axis=1)
+
+        return get_modified_loss(model, inputs, labels, untargeted_fn, targeted_fn, targeted, modifier)
+
+    return loss_fn
+
+
+def get_dummy_loss_fn(model: Model, labels: ep.Tensor, targeted: bool, modifier: dict,
+                   ) -> Callable[[ep.Tensor, ep.Tensor], ep.Tensor]:
+
+    def loss_fn(inputs: ep.Tensor) -> ep.Tensor:
+        modifier['softmax'] = True   # overwrites softmax parameter
+        indices = np.arange(labels.shape[0])
+
+        targeted_fn = lambda z, labels: z[indices, labels] * torch.randint(-1, 2, size=z[indices, labels].shape).to("cuda")
+        untargeted_fn = lambda z, labels: -z[indices, labels] * torch.randint(-1, 2, size=z[indices, labels].shape).to("cuda")
 
         return get_modified_loss(model, inputs, labels, untargeted_fn, targeted_fn, targeted, modifier)
 

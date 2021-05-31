@@ -1,34 +1,36 @@
-""" This script runs A^3 to search models in block B from the paper
+""" This script runs A^3 on extended search space for block A models
 Model code: model name
-B10: Gowal2020Uncovering_28_10_extra
-B11: AWP_RST_wrn28_10
-B12: Zhang2020Geometry
-B13: Carmon2019Unlabeled
-B14: Hydra
+A1: Model2
+A2: Model3
+A3: Model4
+A4: Model5
+A5: Model6
+A6: Model7
+A7: Model8
+A8: Model9
+
+A9 is excluded because the variance is too large across runs due to the obfuscated nature of the defense
 """
 
 import eagerpy as ep
 from utils.utils import print_eval_result
 from attack.attack_search import seq_attack_search
-from attack.search_space import Linf_search_space
+from attack.search_space import Linf_extended_search_space
 from zoo.cifar_model_pool import *
-from zoo.benchmark import *
-from zoo.wideresnet import *
 
 device = 'cuda'
-epsilon = 8/255 # 0.031 for Zhang2020Geometry
+epsilon = 4 / 255
 norm = ep.inf
-logdir = 'logB'
+logdir = 'logA'
 
 # Hyperparameters for search
 num_attack = 3
 ntrials = 64
 nbase = 100
-search_space = Linf_search_space({"APGD": True})
-tl = 3  # timelimit
+search_space = Linf_extended_search_space({"APGD": True})
 
-Models = [(Gowal2020Uncovering_28_10_extra, tl), (AWP_RST_wrn28_10, tl), (Carmon2019Unlabeled, tl),
-          (Zhang2020Geometry, tl), (Hydra, tl)]
+Models = [(Model2, 0.5), (Model3, 0.5), (Model4, 0.5), (Model5, 0.5), (Model6, 0.5), (Model7, 0.5),
+          (Model8, 0.5), (Model9, 1)]
 
 results = []
 for model, timelimit in Models:
@@ -40,5 +42,5 @@ for model, timelimit in Models:
     results.append(eval_result)
 
 # for i, result in enumerate(results):
-#     print("The ", i, "th network result is: ")
+#     print("The ", i+1, "th network result is: ")
 #     print_eval_result(result)

@@ -85,6 +85,9 @@ def get_param_dict(attack):
         return {"rel_stepsize": 0.01 / 0.3, "param_dict": {"rel_slope": 1, "freq": 1}, "abs_stepsize": None,
                 "steps": 40, "random_start": True, "EOT": 1, "loss": 'ce'}
 
+    elif isinstance(attack, LinfDummy):
+        return {"a": 1, "b": 2, "c": 3, "loss": "ce"}
+
     else:
         assert False, "Unrecognized attack"
 
@@ -285,6 +288,54 @@ class LinfAPGDAttack(AutoAttackBase):
     @staticmethod
     def name():
         return "APGD"
+
+
+class LinfDummy(Attack):
+    def __init__(self, params=None):
+        super().__init__()
+        self.params = get_param_dict(self)
+
+    def run(self, model, images, labels, epsilon):
+        return images + epsilon * torch.randn(images.shape).to("cuda")
+
+    def set_param(self, params):
+        assert (isinstance(params, dict)), "Parameters has to be type dictionary"
+        for key in params:
+            if key in self.params:
+                self.params[key] = params[key]
+        return self
+
+class LinfDummy1(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
+
+class LinfDummy2(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
+
+class LinfDummy3(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
+
+class LinfDummy4(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
+
+class LinfDummy5(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
+
+class LinfDummy6(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
+
+class LinfDummy7(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
+
+class LinfDummy8(LinfDummy):
+    def __init__(self, params=None):
+        super().__init__()
 
 
 class LinfRepeatedAdditiveUniformNoiseAttack(FoolboxAttack):

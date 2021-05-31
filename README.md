@@ -25,15 +25,20 @@ python autoattack_eval.py (AutoAttack on defenses)
 python aa_detector_eval.py (AutoAttack on defenses with detector)
 ```
 
-## Reproduce tpe random comparison in supplementary material:
+## Reproduce scalability result:
+```
+python bmA_scalability.py
+```
+
+## Reproduce ablation study:
+Run Loss formulation comparison:  
+```
+python progression_comparison.py --algo 0 --dir=<result_dir_name, eg loss_noloss1>
+```
 Run TPE vs Random comparison:  
 ```
 python progression_comparison.py --algo 1 --dir=<result_dir_name, e.g tpe_random1>  
 ```
-Run Loss formulation comparison:  
-```
-python progression_comparison.py --algo 0 --dir=<result_dir_name, eg loss_noloss1>
-``` 
 Analyze result (need to update the result directory names in the script)
 ```
 python progression_analysis.py --algo <bool> --dual <bool, to plot TPE vs Random and loss formulation together>

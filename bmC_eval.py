@@ -1,4 +1,4 @@
-""" This script runs A^3 to search models in group B from the paper
+""" This script runs A^3 to search models in block C from the paper
 Model code: model name
 C15: CCAT
 C16: FeatureScatter
