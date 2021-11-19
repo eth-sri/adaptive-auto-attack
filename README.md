@@ -8,7 +8,7 @@ arxiv: https://arxiv.org/abs/2102.11860v1
 
 
 ## Setup:
-python version>=3.8
+python version==3.8.X
 ```
 1. pip install -r requirement.txt
 2. pip install git+https://github.com/RobustBench/robustbench.git@v0.2.1
